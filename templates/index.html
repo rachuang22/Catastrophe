@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CatStats</title>
+    </head>
+    <body>
+        <h1>CatStats!</h1>
+        Newest image in r/aww:
+        <br><br><img src="{{url}}"><br><br>
+        This is <b>{{cat}}</b> a cat. <br>
+        Posted on: {{timestamp}} UTC <br>   
+        This image has <b>{{verified}}</b> been verified.
+        <br><br>Are we correct? <br>
+        <form action="/" method="post" enctype="multipart/form-data" target="dummyframe">
+            <button type=submit id="yes" type="button" name = "userInput" value = "True" onclick=thanks() >Yes</button>
+            <button type=submit id="no" type="button" name = "userInput" value = "False" onclick=fail()>No</button>
+            <input type="hidden" name="url" value = "{{url}}">
+            <input type="hidden" name="cat" value = "{{cat}}">
+        </form>
+        <br> <button id="yes" type="button" onclick="window.location.reload();">Reload Page</button>
+        <!-- redirect to invisible frame to force stay on page -->
+        <iframe style="visibility: hidden;" width="0" height="0" border="0" name="dummyframe" id="dummyframe"></iframe> 
+    </body>
+</html>
+
+<script>
+// function stop(){
+//     if({{verified}} == "") {
+//         document.getElementById("yes").disabled = true;
+//     } else {
+//         document.getElementById("no").disabled = true;
+//     }
+// } 
+function thanks(){
+    document.getElementById("yes").innerHTML = 'Thanks!!';
+    document.getElementById("no").disabled = true;
+} 
+function fail(){
+    document.getElementById("no").style.color = "red";
+    document.getElementById("no").innerHTML = 'Oops :(';
+    document.getElementById("yes").disabled = true;
+} 
+</script>
+
+<!-- CSS -->
+<style>
+
+    body {
+        text-align: center;
+        font-family: Georgia;
+        font-size: 20px;
+    }
+
+    h1 {
+        /*margin-top: 5vh;*/
+        color: #494949;
+    }
+
+    button {
+        border: 0;
+        border-radius: 5px;
+        font-size: 16px;
+        margin: 10px;
+        padding: 10px 12px;
+        background-color: #aee285;
+        transition: 0.2s;
+        letter-spacing: 0;
+        cursor: pointer;
+    }
+
+    button:hover, button:focus {
+        padding: 10px 16px;
+        letter-spacing: 0.5;
+    }
+
+    #no {
+        background-color: #bcbcbc;
+    }
+
+</style>
+
