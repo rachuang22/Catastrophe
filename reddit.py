@@ -25,7 +25,6 @@ client = boto3.client('kinesis', aws_access_key_id=AWS_KEY,
                             aws_secret_access_key=AWS_SECRET,
                             region_name=REGION)
 
-
 print client.list_streams()
 
 # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kinesis.html#Kinesis.Client.put_record
