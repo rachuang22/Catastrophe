@@ -25,18 +25,18 @@ client = boto3.client('kinesis', aws_access_key_id=AWS_KEY,
                             region_name=REGION)
 
 if __name__ == '__main__':
-    print ('Listening...')
+    print ('Start: ' + str(datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')))
     # ------ Get newest image postings from Reddit ------ #
     subreddit = reddit.subreddit('aww')
     for submission in subreddit.stream.submissions():
-        if (datetime.utcnow() - timedelta(minutes=0) <= datetime.utcfromtimestamp(submission.created_utc)): # Only analyze images from past 0 mins, else stream will provide previous hours' posts
+        if (datetime.utcnow() - timedelta(seconds=30) <= datetime.utcfromtimestamp(submission.created_utc)): # Only analyze images from past 30s+, else stream will provide previous hours' posts
             print ('----------------------------------------------------------------------')
             # https://praw.readthedocs.io/en/latest/code_overview/models/submission.html?highlight=.url
             link = submission.url # url of the image
 
             # ------ Logic to get only images ------ #
             # if domain is https://i.redd.it/ or https://imgur.com/, then is a pullable image
-            if link[:18] == "https://i.redd.it/" or link[:18] == "https://imgur.com/":
+            if link[:18] == "https://i.redd.it/" or link[:18] == "https://imgur.com/" or link[:20] == 'https://i.imgur.com/':
                 passData = {
                     "title": submission.title.encode('utf-8'),
                     "img-url": submission.url, # url of the image
@@ -55,4 +55,6 @@ if __name__ == '__main__':
 
                 # print (response)
             else:
+                print (submission.url)
                 print ("Post is not an image!")
+
