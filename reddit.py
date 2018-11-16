@@ -1,7 +1,6 @@
 import praw
 import boto3
 import json
-from boto import kinesis
 from datetime import datetime, timedelta
 
 # ------ Set Up Credential File ------ #
@@ -47,13 +46,13 @@ if __name__ == '__main__':
                 
                 # ------ Publish a record to Kinesis ------ #
                 # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kinesis.html#Kinesis.Client.put_record
-                # response = client.put_record(
-                #     StreamName='Catappstrophe',
-                #     Data=json.dumps(passData),
-                #     PartitionKey='partitionKey1'
-                # )
+                response = client.put_record(
+                    StreamName='Catappstrophe',
+                    Data=json.dumps(passData),
+                    PartitionKey='partitionKey1'
+                )
 
-                # print (response)
+                #print (response)
             else:
                 print (submission.url)
                 print ("Post is not an image!")
