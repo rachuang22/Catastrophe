@@ -1,10 +1,8 @@
 import praw
 import boto3
 from boto import kinesis
+import credentials.ini
 
-AWS_KEY="AKIAIDYW3QB6YVXKURVQ"
-AWS_SECRET="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"
-REGION="us-east-2"
 
 # ------ Get newest postings from Reddit ------ #
 reddit = praw.Reddit(client_id='iW3F2X0p_3e9ag',
