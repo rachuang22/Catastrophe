@@ -5,9 +5,16 @@ import io
 
 # pass on url.jpg + image itself to s3
 def my_handler(event, context):
-    return event['img-url']
+    output = []
 
-getting the image from the url
+    # getting the required data needed
+    for record in event['Data']:
+        url = record['img-url']
+        timestamp = record['timestamp']
+        title = record['title']
+    return {'records': output}
+
+# getting the image from the url
 with urllib.request.urlopen(URL) as url:
     f = io.BytesIO(url.read())
 
