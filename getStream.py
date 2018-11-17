@@ -28,12 +28,14 @@ record = client.get_records(
 	ShardIterator=my_shard_iterator,
 	Limit=2)
 print streamData['StreamDescription']['Shards'][0]
-print record['Records']
 while 'NextShardIterator' in record:
-	print len(record['Records'])
+	if len(record['Records']) > 0:
+		print len(record['Records'])
+	for post in record['Records']:
+		print post
 	record = client.get_records(
 		ShardIterator=record['NextShardIterator'],
 		Limit=2)
-	print record['Records']
+	
 	time.sleep(5) # slow processing down else will meet AWS cap
 
