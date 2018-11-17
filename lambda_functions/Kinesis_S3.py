@@ -7,6 +7,13 @@ import io
 def my_handler(event, context):
     output = []
 
+    # getting the required data needed
+    for record in event['Data']:
+        url = record['img-url']
+        timestamp = record['timestamp']
+        title = record['title']
+    return {'records': output}
+
 # getting the image from the url
 with urllib.request.urlopen(URL) as url:
     f = io.BytesIO(url.read())
