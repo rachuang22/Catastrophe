@@ -4,10 +4,17 @@ from flask import render_template, redirect
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
 from datetime import datetime, timedelta
+import MRmyjob
 
-AWS_KEY="AKIAIDYW3QB6YVXKURVQ"
-AWS_SECRET="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"
-REGION="us-east-2"
+# ------ Set Up Credential File ------ #
+# pip install configparser
+# create a credentials.ini file with AWS_KEY, AWS_SECRET, REGION
+from configparser import ConfigParser
+config = ConfigParser()  
+config.read('credentials.ini')  
+AWS_KEY = str(config.get('auth', 'AWS_KEY'))
+AWS_SECRET = config.get('auth', 'AWS_SECRET').encode('utf-8')
+REGION = config.get('auth', 'REGION').encode('utf-8')
 
 dynamodb = boto3.resource('dynamodb', aws_access_key_id=AWS_KEY,
                             aws_secret_access_key=AWS_SECRET,
@@ -82,6 +89,27 @@ def index():
             verif = ""
 
         return render_template('index.html', url = items[0]['url'], cat = cat, timestamp = fetchedTimestamp, verified = verif)
+
+@app.route('/count', methods=['GET'])
+def count_page():
+    response = table.scan()
+    with open('out.json', 'w') as f:
+        json.dump(response['Items'], f)
+
+    df = pd.read_json("out.json")
+    response = df.to_csv("out.csv")
+
+    
+
+    studentlist=[]
+    for item in results:
+        student={}
+        student['ID'] = item[0]
+        student['Name'] = item[1]
+        student['DOB'] = item[2]
+        studentlist.append(student)   
+    return render_template('count.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
