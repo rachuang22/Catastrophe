@@ -7,7 +7,7 @@ import io
 def my_handler(event, context):
     return event['img-url']
 
-getting the image from the url
+# getting the image from the url
 with urllib.request.urlopen(URL) as url:
     f = io.BytesIO(url.read())
 
