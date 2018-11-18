@@ -17,11 +17,6 @@ Cloud project using AWS to do real-time cat detection from a subreddit.
   - Lambda Function 1: getting image from kinesis url
       - https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis-example.html
       - Put images into S3 using lambda https://medium.com/think-serverless/image-upload-and-retrieval-from-s3-using-aws-api-gateway-and-lambda-b4c2961e8d1
-  - Final Architecture: 
-      - Kinesis -> lambda function 1 -> s3 -> lambda function 2 -> dynamodb -> flask app
-      - https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kinesis.html
-  - Powerpoint (5-10 pages): complete by 11/14
-      - AWS Architecture:
       
       ![Architecutre](Images/Architecture.png)
       
