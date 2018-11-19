@@ -16,6 +16,7 @@ s3 = boto3.client('s3', aws_access_key_id=AWS_KEY,
 
 # pass on url.jpg + image itself to s3
 def my_handler(event, context):
+    print event
 
     records = event['Records']
     url = base64.b64decode(records[0]['kinesis']['data'])
@@ -27,8 +28,9 @@ def my_handler(event, context):
     for word in words:
         newurl+=('\\'+word)
 
+    newurl = words[-2]+'-'+words[-1]
 
-    s3.upload_file(lambda_path, BUCKET, newurl[1:])
+    s3.upload_file(lambda_path, BUCKET, newurl)
     return event
 
 
