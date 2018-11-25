@@ -1,0 +1,9 @@
+BASICALLY
+
+upload deployment package to s3 bucket
+make new lambda instance on cloudformation
+use the .json in the bucket
+grant dynamodb access to serverless role
+put item in bucket
+..wait for it....
+everything should be in the dynamodb table you specified!!!!!!

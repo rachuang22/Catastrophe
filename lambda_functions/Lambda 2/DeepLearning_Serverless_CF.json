@@ -1,0 +1,173 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+
+  "Description" : "AWS CloudFormation creates all necessary AWS resources",
+
+  "Parameters" : {
+
+    "ModelAndCodeBucket" : {
+      "Description" : "Name of the Bucket containing DeepLearning bundle as a ZIP object",
+      "Type" : "String",
+      "MinLength" : "1",
+      "MaxLength" : "80"
+    },
+
+    "DLBundleObjectKey" : {
+      "Description" : "The ZIP object prefix for the code bundle",
+      "Type" : "String",
+      "Default" : "deeplearning-bundle.zip",
+      "MinLength" : "1",
+      "MaxLength" : "80"
+    },
+
+    "DLTestBucketName" : {
+      "Description" : "Bucket where the test images will be located",
+      "Type" : "String",
+      "Default" : "deeplearning-test-bucket",
+      "MinLength" : "1",
+      "MaxLength" : "80"
+    }
+
+  },
+
+  "Resources" : {
+
+    "myDLServerlessLambdaRole" : {
+      "Type" : "AWS::IAM::Role",
+      "Properties" : {
+        "RoleName": "DLServerlessLambdaRole",
+        "AssumeRolePolicyDocument": {
+          "Version" : "2012-10-17",
+          "Statement": [ {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": [ "lambda.amazonaws.com" ]
+            },
+            "Action": [ "sts:AssumeRole" ]
+          } ]
+        },
+        "Path": "/",
+         "Policies": [ {
+            "PolicyName": "root",
+            "PolicyDocument": {
+
+              "Version": "2012-10-17",
+              "Statement": [
+                  {
+                      "Effect": "Allow",
+                      "Action": [
+                        "logs:CreateLogGroup",
+                        "logs:CreateLogStream",
+                        "logs:GetLogEvents",
+                        "logs:PutLogEvents"
+                      ],
+                      "Resource": "arn:aws:logs:*:*:*"
+                  },
+                  {
+                      "Sid": "Stmt1501000329789",
+                      "Effect": "Allow",
+                      "Action": [
+                          "s3:Get*"
+                      ],
+                      "Resource": {
+                          "Fn::Join": [
+                              "",
+                              [
+                                  "arn:aws:s3:::",
+                                  {"Ref": "DLTestBucketName"},
+                                  "/*"
+                              ]
+                          ]
+                      }
+                  },
+                  {
+                      "Sid": "Stmt150100867543",
+                      "Effect": "Allow",
+                      "Action": [
+                          "s3:Get*"
+                      ],
+                      "Resource": {
+                          "Fn::Join": [
+                              "",
+                              [
+                                  "arn:aws:s3:::",
+                                  {"Ref": "ModelAndCodeBucket"},
+                                  "/*"
+                              ]
+                          ]
+                      }
+                  }
+
+              ]
+            }
+          } ]
+        }
+      },
+
+      "myDeepLearningLambda": {
+    		"Type": "AWS::Lambda::Function",
+    		"Properties": {
+    			"Handler": "classify_image.lambda_handler",
+    			"FunctionName": "DeepLearning_Lambda",
+    			"Role": {
+    				"Fn::GetAtt": ["myDLServerlessLambdaRole", "Arn"]
+    			},
+    			"Description": "Testing DL inference using DeepLearning model and AWS Lambda",
+    			"MemorySize": 1400,
+    			"Code": {
+    				"S3Bucket": {"Ref": "ModelAndCodeBucket"},
+    				"S3Key": {"Ref": "DLBundleObjectKey"}
+    			},
+    			"Runtime": "python2.7",
+    			"Timeout": "300",
+    			"Environment": {
+    				"Variables": {
+              "model_bucket_name": {"Ref": "ModelAndCodeBucket"},
+    					"region": { "Ref": "AWS::Region" }
+    				}
+    			}
+    		}
+    	},
+
+      "TensorFlowExecuteLambdaPermission": {
+          "Type" : "AWS::Lambda::Permission",
+          "Properties" : {
+              "Action":"lambda:invokeFunction",
+              "FunctionName": { "Fn::GetAtt": [ "myDeepLearningLambda", "Arn" ]},
+              "Principal": "s3.amazonaws.com",
+              "SourceAccount": {"Ref" : "AWS::AccountId" },
+              "SourceArn": {
+                  "Fn::Join": [":", [
+                      "arn","aws","s3","", ""
+                       ,{"Ref" : "DLTestBucketName"}]]
+              }
+          }
+      },
+
+      "S3Bucket" : {
+        "Type" : "AWS::S3::Bucket",
+        "Properties" : {
+          "BucketName" : {"Ref": "DLTestBucketName"},
+          "NotificationConfiguration" : {
+            "LambdaConfigurations" : [{
+              "Function" : { "Fn::GetAtt" : ["myDeepLearningLambda", "Arn"] },
+              "Event" : "s3:ObjectCreated:*"
+            }
+          ]
+        }
+      }
+    }
+  },
+
+  "Outputs" : {
+    "outLambdaRole" : {
+      "Value" : { "Ref" : "myDLServerlessLambdaRole" },
+      "Description" : "AWS Role for the lambda functions"
+    },
+
+    "outDeeplearningLambda" : {
+      "Value" : { "Ref" : "myDeepLearningLambda" },
+      "Description" : "This is ARN of the our deep learning Lambda function"
+    }
+  }
+}
