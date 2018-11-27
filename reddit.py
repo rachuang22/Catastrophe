@@ -40,7 +40,7 @@ if __name__ == '__main__':
                     "title": submission.title.encode('utf-8'),
                     "img-url": submission.url, # url of the image
                     "timestamp": datetime.utcfromtimestamp(submission.created_utc).strftime('%Y-%m-%d %H:%M:%S'), # time created in utc
-                    "author" : submission.author,
+                    "author" : str(submission.author),
                     "num_comments" : submission.num_comments,
                     "upvotes": submission.score,
                     "upvote_ratio": submission.upvote_ratio,
@@ -51,7 +51,7 @@ if __name__ == '__main__':
                 # ------ Publish a record to Kinesis ------ #
                 # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kinesis.html#Kinesis.Client.put_record
                 response = client.put_record(
-                    StreamName='catastrophe-images',
+                    StreamName='catappstrophe',
                     Data=json.dumps(passData),
                     PartitionKey='partitionKey1'
                 )
