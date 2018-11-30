@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>CatStats</title>
+        <meta charset='utf-8'>
+		<title>🐱Catastrophe🐱</title>
     </head>
     <body>
-        <h1>CatStats!</h1>
+        <h1>🐱Catastrophe!🐱</h1>
+		<center>
+		<h4><a href="/">Homepage</a> | <a href="/catstats">Database of /r/aww</a> | <a href="/mapreduce">Object MapReduce</a> | <a href="/mapreducepopular">MapReduce Popular</a> | <a href="/catverified">General Stats</a> | <a href="http://www.github.com/rachuang22/Catastrophe">🔥🔥Github Page🔥🔥</a></h4></center>
+		<br>
         Newest image in r/aww:
+        <br><br> <a href="http://www.reddit.com{{permalink}}">{{title}}</a>
         <br><br><img src="{{url}}"><br><br>
-        This is <b>{{cat}}</b> a cat. <br>
+        This is a <b>"{{object}}"</b>, which is in the category {{category}}. We're {{probability}} certain.<br>
         Posted on: {{timestamp}} UTC <br>   
         This image has <b>{{verified}}</b> been verified.
         <br><br>Are we correct? <br>
         <form action="/" method="post" enctype="multipart/form-data" target="dummyframe">
             <button type=submit id="yes" type="button" name = "userInput" value = "True" onclick=thanks() >Yes</button>
             <button type=submit id="no" type="button" name = "userInput" value = "False" onclick=fail()>No</button>
-            <input type="hidden" name="url" value = "{{url}}">
-            <input type="hidden" name="cat" value = "{{cat}}">
+            <input type="hidden" name="url" value = "{{name}}">
+			<input type="hidden" name="timestamp" value = "{{timestamp}}">
         </form>
         <br> <button id="yes" type="button" onclick="window.location.reload();">Reload Page</button>
         <!-- redirect to invisible frame to force stay on page -->
-        <iframe style="visibility: hidden;" width="0" height="0" border="0" name="dummyframe" id="dummyframe"></iframe> 
+        <iframe style="visibility: hidden;" width="0" height="0" border="0" name="dummyframe" id="dummyframe"></iframe>
+		<br>
+		
     </body>
 </html>
 
@@ -76,6 +83,10 @@ function fail(){
     #no {
         background-color: #bcbcbc;
     }
+	img {
+		width:100%;
+		max-width:800px;
+	}
 
 </style>
 

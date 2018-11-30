@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset='utf-8'>
+    <title>🐱Catastrophe🐱</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<center>
+	<h1>General Stats</h1>
+	<br>
+		<h4><a href="/">Homepage</a> | <a href="/catstats">Database of /r/aww</a> | <a href="/mapreduce">Object MapReduce</a> | <a href="/mapreducepopular">MapReduce Popular</a> | <a href="/catverified">General Stats</a> | <a href="http://www.github.com/rachuang22/Catastrophe">🔥🔥Github Page🔥🔥</a></h4>
+	</center>
+	<hr>
+	<br>
+	<div class="row">
+		<div class="column">
+			<center>
+				<h1>Verification Statistics</h1>
+				<br>
+				<p>Total Number of Objects: {{total_count}}</p>
+				<p>Number of Verified Objects: {{number_verified}}</p>
+				<p>Number of Incorrectly Verified Objects: {{number_wrong}}</p>
+				<p>% Algorithm Got Right: {{alg_correct}}</p>
+				<p>% Algorithm Got Wrong: {{alg_wrong}}</p>
+				<p>% Not Checked: {{alg_not_checked}}</p>
+			</center>
+		</div>
+		<div class="column">
+			<center>
+				<h1>Popularity Statistics</h1>
+				<br>
+				<p>Most Popular Animal...in last hour: {{category1}}</p>
+				<p>with an amount of: {{amount1}}
+				<p>Most Popular Animal...in last 24 hours: {{category2}}</p>
+				<p>with an amount of: {{amount2}}</p>
+				<p>Most Popular Animal...all time: {{category3}}</p>
+				<p>with an amount of: {{amount3}}</p>
+				<p>To see 100 links of the most popular animal,<a href="/mapreducepopular"> click here</a></p>
+			</center>
+		</div>
+	</div>
+
+</body>
+
+</html>
+
+<!-- CSS -->
+<style>
+    body {
+        text-align: center;
+        font-family: Georgia;
+        font-size: 20px;
+    }
+	h1 {
+        font-size: 24
+		color: #494949;
+    }
+	.column {
+    float: left;
+    width: 50%;
+	}
+
+	/* Clear floats after the columns */
+	.row:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+</style>

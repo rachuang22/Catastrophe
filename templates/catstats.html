@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset='utf-8'>
+    <title>🐱Catastrophe🐱</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <center>
+        <h1>Database of r/aww/</h1>
+    <br>
+   <h4><a href="/">Homepage</a> | <a href="/catstats">Database of /r/aww</a> | <a href="/mapreduce">Object MapReduce</a> | <a href="/mapreducepopular">MapReduce Popular</a> | <a href="/catverified">General Stats</a> | <a href="http://www.github.com/rachuang22/Catastrophe">🔥🔥Github Page🔥🔥</a></h4>
+    </center>
+    <br>
+
+<table class="table table-striped"><tr><th>Title</th><th>Author</th><th>Object Detected</th><th>Confidence</th><th>Correct?<th>Posted Time (UTC)</th><th>Link</th></tr>
+
+{% for item in tablelist %}
+<tr>
+	<td>{{item.title}}</td>
+	<td>{{item.author}}</td>
+	<td>{{item.object}}</td>
+	<td>{{item.probability}}</td>
+	<td>{{item.correct}}</td>
+	<td>{{item.timestamp}}</td>
+	<td><a href="{{item.link}}">{{item.link}}</a></td>
+</tr>
+{% endfor %}
+
+</table>
+
+</body>
+
+</html>
+
+<!-- CSS -->
+<style>
+    body {
+        text-align: left;
+        font-family: Georgia;
+        font-size: 14px;
+    }
+</style>

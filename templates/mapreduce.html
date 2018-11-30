@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset='utf-8'>
+    <title>🐱Catastrophe🐱</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <center>
+        <h1>Object MapReduce</h1>
+    <br>
+   <h4><a href="/">Homepage</a> | <a href="/catstats">Database of /r/aww</a> | <a href="/mapreduce">Object MapReduce</a> | <a href="/mapreducepopular">MapReduce Popular</a> | <a href="/catverified">General Stats</a> | <a href="http://www.github.com/rachuang22/Catastrophe">🔥🔥Github Page🔥🔥</a></h4>
+    </center>
+    <br>
+		<center><h2>Unique Classification Count</h2></center>
+	<br>
+<table class="table table-striped">
+<tr>
+	<th>Classification</th>
+	<th>Amount</th>
+</tr>
+
+{% for item in itemlist1 %}
+<tr>
+	<td>{{item.classif}}</td>
+	<td>{{item.amount}}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+<br>
+	<center><h2>Unique Object Count</h2></center>
+<br>
+<table class="table table-striped">
+<tr>
+	<th>Object</th>
+	<th>Amount</th>
+	<th>Classification</th>
+</tr>
+
+{% for item in itemlist2 %}
+<tr>
+	<td>{{item.object}}</td>
+	<td>{{item.amount}}</td>
+	<td>{{item.classif}}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</body>
+
+</html>
+
+<!-- CSS -->
+<style>
+    body {
+        text-align: left;
+        font-family: Georgia;
+        font-size: 14px;
+    }
+	h2	{
+		font-size: 18px;
+	}
+</style>
