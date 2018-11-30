@@ -374,91 +374,91 @@ def aww_map_reduce_popular():
                 entry['post'] = item['link']
                 entry['timestamp'] = item['timestamp']
                 itemlist.append(entry)
-    elif mostPopular == Cat:
+    elif mostPopular == "Cat":
         for item in response['Items']:
             if item['object'] in Cat:
                 entry={}
                 entry['post'] = item['link']
                 entry['timestamp'] = item['timestamp']
                 itemlist.append(entry)
-    elif mostPopular == Bird:
+    elif mostPopular == "Bird":
         for item in response['Items']:
             if item['object'] in Bird:
                 entry={}
                 entry['post'] = item['link']
                 entry['timestamp'] = item['timestamp']
                 itemlist.append(entry)
-    elif mostPopular == Mammals:
+    elif mostPopular == "Mammals":
         for item in response['Items']:
             if item['object'] in Mammals:
                 entry={}
                 entry['post'] = item['link']
                 entry['timestamp'] = item['timestamp']
                 itemlist.append(entry)
-    elif mostPopular == Reptile:
+    elif mostPopular == "Reptile":
         for item in response['Items']:
             if item['object'] in Reptile:
                 entry={}
                 entry['post'] = item['link']
                 entry['timestamp'] = item['timestamp']
                 itemlist.append(entry)
-    elif mostPopular == Marine:
+    elif mostPopular == "Marine":
         for item in response['Items']:
             if item['object'] in Marine:
                 entry={}
                 entry['post'] = item['link']
                 entry['timestamp'] = item['timestamp']
                 itemlist.append(entry)
-    elif mostPopular == Insect:
+    elif mostPopular == "Insect":
         for item in response['Items']:
             if item['object'] in Insect:
                 entry={}
                 entry['post'] = item['link']
                 entry['timestamp'] = item['timestamp']
                 itemlist.append(entry)
-    elif mostPopular == Plant:
+    elif mostPopular == "Plant":
         for item in response['Items']:
             if item['object'] in Plant:
                 entry={}
                 entry['post'] = item['link']
                 entry['timestamp'] = item['timestamp']
                 itemlist.append(entry)
-    elif mostPopular == Food:
+    elif mostPopular == "Food":
         for item in response['Items']:
             if item['object'] in Food:
                 entry={}
                 entry['post'] = item['link']
                 entry['timestamp'] = item['timestamp']
                 itemlist.append(entry)
-    elif mostPopular == Cloth:
+    elif mostPopular == "Cloth":
         for item in response['Items']:
             if item['object'] in Cloth:
                 entry={}
                 entry['post'] = item['link']
                 entry['timestamp'] = item['timestamp']
                 itemlist.append(entry)
-    elif mostPopular == Human:
+    elif mostPopular == "Human":
         for item in response['Items']:
             if item['object'] in Human:
                 entry={}
                 entry['post'] = item['link']
                 entry['timestamp'] = item['timestamp']
                 itemlist.append(entry)
-    elif mostPopular == Structure:
+    elif mostPopular == "Structure":
         for item in response['Items']:
             if item['object'] in Structure:
                 entry={}
                 entry['post'] = item['link']
                 entry['timestamp'] = item['timestamp']
                 itemlist.append(entry)
-    elif mostPopular == Baby:
+    elif mostPopular == "Baby":
         for item in response['Items']:
             if item['object'] in Baby:
                 entry={}
                 entry['post'] = item['link']
                 entry['timestamp'] = item['timestamp']
                 itemlist.append(entry)
-    elif mostPopular == Inanimate:
+    elif mostPopular == "Inanimate":
         for item in response['Items']:
             if item['object'] in Inanimate:
                 entry={}
@@ -466,7 +466,7 @@ def aww_map_reduce_popular():
                 entry['timestamp'] = item['timestamp']
                 itemlist.append(entry)
     print response
-    return render_template('mapreducepopular.html', itemlist=itemlist)
+    return render_template('mapreducepopular.html', itemlist=itemlist, mostpopular=mostPopular)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
