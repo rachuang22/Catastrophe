@@ -19,8 +19,6 @@ AWS_KEY = str(config.get('auth', 'AWS_KEY'))
 AWS_SECRET = config.get('auth', 'AWS_SECRET').encode('utf-8')
 REGION = config.get('auth', 'REGION').encode('utf-8')
 
-REGION="us-east-2"
-
 dynamodb = boto3.resource('dynamodb', aws_access_key_id=AWS_KEY,
                             aws_secret_access_key=AWS_SECRET,
                             region_name=REGION)
