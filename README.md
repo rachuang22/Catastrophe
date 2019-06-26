@@ -11,3 +11,7 @@ Cloud project using AWS to do real-time cat detection from a subreddit.
 # Execution
 To run locally: 
    ``` python kinesis.py ```
+ 
+# Website 
+This is what our website looks like running live.
+![bison](Images/bison.png)
